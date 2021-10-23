@@ -28,7 +28,7 @@ complete <- function (directory, id = 1:332){             ## The function comple
   for (i in id){                                          ## the no. of iteration of this for loop will depend on id
     data<-read.csv(csvlist[i])                            ## reads the ith element of the csvlist, stored to data
     total <- sum(complete.cases(data))                    ## total holds the sum of the complete cases (knowing these through complete.cases function) in each file of data                    
-    y = c(y, total)                                        ## concatenating the total with y and storing it to y
+    y = c(y, total)                                       ## concatenating the total with y and storing it to y
   }                                                       ## the value of y updates until the end of for loop 
   data.frame(id, y)                                       ## creates a data frame with id as the 1st column and complete cases as the 2nd column
 }                                                         ## end of the complete function
@@ -40,16 +40,16 @@ complete(specdata, 3)
 
 ## Problem 3, Modifying codes in Problems 1 and 2
 
-corr <- function(directory, threshold = 0){               ## The function corr takes 2 arguments
-  specdata <-c("C:/Users/Kimberly/Documents/specdata/")   ## specdata holds the location of the .csv files (wd) 
-  csvlist <-list.files(path=specdata, pattern = ".csv")   ## csvlist holds the list of files (csv) using the list.files() function
+corr <- function(directory, threshold = 0){                 ## The function corr takes 2 arguments
+  specdata <-c("C:/Users/Kimberly/Documents/specdata/")     ## specdata holds the location of the .csv files (wd) 
+  csvlist <-list.files(path=specdata, pattern = ".csv")     ## csvlist holds the list of files (csv) using the list.files() function
   data_frame <- complete(directory = specdata, id = 1:332)  ## using the complete function
   View(data_frame)                                        ## Viewing data_frame with 332 obs. and 2 vars: id and y
   ids <- data_frame[data_frame["y"] > threshold, ] $id    ## Extracting only where the complete cases is greater that the threshold based on id                 
   corr <- c()                                             ## corr being initialized with a null value using the c() function                                                                                 
   for (i in ids){                                         ## the no. of iteration of this for loop will depend on id
     data<-read.csv(csvlist[i])                            ## reads the ith element of the csvlist, stored to data
-    data_frame2= data[complete.cases(data), ]              ## Extracting the complete cases of data
+    data_frame2= data[complete.cases(data), ]             ## Extracting the complete cases of data
     corr = c(corr, cor(data_frame2$sulfate, data_frame2$nitrate))  ## Correlating the sulfate and nitrate exclusive only for those with complete cases, concatenating this to corr
   }                                                       ## end of for loop
   return(corr)                                            ## returns the value of correlation
@@ -70,8 +70,8 @@ head (cr); summary(cr); length(cr)
 ## Problem 4
 
 unzip("rprog_data_ProgHospData.zip", exdir = ".")   ## Unzipping the file
-setwd("~/")                                     ## Setting the directory where the unzipped files were located
-getwd()                                         ## Checking the current directory
+setwd("~/")                                         ## Setting the directory where the unzipped files were located
+getwd()                                             ## Checking the current directory
 outcome <- read.csv('outcome-of-care-measures.csv', colClasses= "character")   ## Reads the csv file
 head(outcome)                                   ## head() function to show the first few rows of outcome
 ncol(outcome)                                   ## ncol() function to show the number of columns of outcome
@@ -82,7 +82,5 @@ hist(outcome[,11])                              ## Histogram of outcome[,11] (co
 
 outcome[,11] <- as.numeric(outcome[,11])        ## coerce the objects, in column 11 of outcome, to be in numeric
 hist(outcome[,11] , main = paste(colnames(outcome[11])), xlab="Deaths")   ## Adding an argument main, to have a title
-                                                                          ## which is the name of column 11 of outcome
-                  ## (Hospital 30-Day Death (Morality) Rates from Heart Attack), and x-axis labels which is Death 
-
-?hist
+                                                                          ## which is the name of column 11 of outcome 
+## (Hospital 30-Day Death (Morality) Rates from Heart Attack), and x-axis labels which is Death 
