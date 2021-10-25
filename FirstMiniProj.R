@@ -72,15 +72,17 @@ head (cr); summary(cr); length(cr)
 unzip("rprog_data_ProgHospData.zip", exdir = ".")   ## Unzipping the file
 setwd("~/")                                         ## Setting the directory where the unzipped files were located
 getwd()                                             ## Checking the current directory
-outcome <- read.csv('outcome-of-care-measures.csv', colClasses= "character")   ## Reads the csv file
+outcome <- read.csv('outcome-of-care-measures.csv', colClasses= "character")   ## Reads the csv file, setting the column class to be in character
 head(outcome)                                   ## head() function to show the first few rows of outcome
 ncol(outcome)                                   ## ncol() function to show the number of columns of outcome
 nrow(outcome)                                   ## nrow() function to show the number of rows of outcome
 
-outcome[,11] <- as.numeric(outcome[,11])        ## coerce the objects, in column 11 of rows, to be in numeric
+outcome[,11] <- as.numeric(outcome[,11])        ## coerce the objects, in column 11 of outcome, to be in numeric
 hist(outcome[,11])                              ## Histogram of outcome[,11] (column 11 of outcome)
 
+?hist
+outcome <- read.csv('outcome-of-care-measures.csv', colClasses= "character", check.names = F)   ## Adding an argument check.names = F in order to get rid of the dots as spaces between words
 outcome[,11] <- as.numeric(outcome[,11])        ## coerce the objects, in column 11 of outcome, to be in numeric
-hist(outcome[,11] , main = paste(colnames(outcome[11])), xlab="Deaths")   ## Adding an argument main, to have a title
-                                                                          ## which is the name of column 11 of outcome 
-## (Hospital 30-Day Death (Morality) Rates from Heart Attack), and x-axis labels which is Death 
+hist(outcome[,11] , main = paste(colnames(outcome[11])), xlab="Deaths", col = "lightblue", border = "black")   
+## Adding an argument main, to have a title which is the name of column 11 of outcome (Hospital 30-Day Death (Morality) Rates from Heart Attack), 
+## and x-axis label which is Death, color which is light blue, border which is black. 
